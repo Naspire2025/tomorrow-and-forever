@@ -390,6 +390,26 @@ a.store:hover{border-color:var(--gold)}
 .cards3 h3{font-size:22px;color:var(--emerald)}
 .cards3 p{font-size:16px;color:var(--body)}
 @media (max-width:900px){.cards3{grid-template-columns:1fr}}
+
+/* Contact: form on paper beside an emerald panel of other ways to reach the author */
+.contact-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:32px;align-items:start}
+.cform{background:var(--panel);border:1px solid var(--edge);border-radius:24px;padding:30px;display:grid;gap:18px}
+.cform .row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cform label{display:flex;flex-direction:column;gap:6px;font-weight:700;color:var(--emerald);font-size:16px}
+.cform input,.cform select,.cform textarea{font:inherit;font-size:17px;font-weight:400;color:var(--ink);background:#fff;border:1px solid var(--edge);border-radius:12px;padding:11px 14px;width:100%}
+.cform textarea{min-height:170px;resize:vertical}
+.cform input:focus,.cform select:focus,.cform textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,174,85,.25)}
+.cform .hp{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);opacity:0;pointer-events:none}
+.cform .btn{justify-self:start}
+.cform .btn[disabled]{opacity:.6;cursor:wait;transform:none}
+.fnote{font-size:14px;color:var(--muted)}
+.fstatus{border-radius:12px;padding:12px 16px;font-size:16px;font-weight:700}
+.fstatus.ok{background:var(--mint);color:var(--emerald)}
+.fstatus.err{background:#FBE3DC;color:#8A2A12}
+.contact-grid .connect p{color:var(--soft)}
+.contact-grid .connect .links{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+@media (max-width:560px){.cform{padding:22px}.cform .row2{grid-template-columns:1fr}}
 @media (max-width:560px){
   .brand b{font-size:19px;white-space:nowrap}.brand small{display:none}.brand img{width:34px;height:34px}
   .hdr{gap:10px;min-height:62px}.lang{padding:6px 12px;font-size:14px}
@@ -410,6 +430,7 @@ a.store:hover{border-color:var(--gold)}
       <a href="#preview" data-go="preview" data-t="navPreview">تصفّح الكتاب</a>
       <a href="#author" data-go="author" data-t="navAuthor">المؤلف</a>
       <a href="#buy" data-go="buy" data-t="navBuy">الشراء</a>
+      <a href="#contact" data-go="contact" data-t="navContact">تواصل</a>
     </nav>
     <button class="lang" id="langBtn" type="button">English</button>
     <a class="btn btn-gold buy-top" href="#buy" data-go="buy" data-t="ctaBuy">اشترِ نسختك</a>
@@ -661,7 +682,7 @@ a.store:hover{border-color:var(--gold)}
         <a class="btn btn-gold" href="#buy" data-go="buy" data-t="ctaBuy">اشترِ نسختك</a>
       </div>
       <div class="cards3" style="grid-template-columns:1fr">
-        <div><h3 data-t="talkTitle">محاضرات وورش عمل</h3><p data-t="talkText"></p><a class="btn btn-dark" href="https://www.drmash.net/contact/" target="_blank" rel="noopener" data-t="contactBtn">تواصل مع المؤلف</a></div>
+        <div><h3 data-t="talkTitle">محاضرات وورش عمل</h3><p data-t="talkText"></p><a class="btn btn-dark" href="#contact" data-go="contact" data-subject="talks" data-t="contactBtn">تواصل مع المؤلف</a></div>
       </div>
     </div>
   </section>
@@ -707,6 +728,50 @@ a.store:hover{border-color:var(--gold)}
     <div class="wrap cards3" id="buyCards"></div>
   </section>
 </div>
+
+<!-- ================= CONTACT ================= -->
+<div data-view="contact">
+  <section class="dark pattern page-hero">
+    <div class="wrap">
+      <p class="eyebrow" data-t="contactEyebrow">تواصل معنا</p>
+      <h1 data-t="contactTitle" style="margin-top:8px">راسل المؤلف</h1>
+      <p data-t="contactLead"></p>
+    </div>
+  </section>
+  <section style="padding-block:56px 80px">
+    <div class="wrap contact-grid">
+      <form class="cform" id="contactForm" novalidate>
+        <div class="row2">
+          <label><span data-t="fName">الاسم</span><input name="name" autocomplete="name" required maxlength="100"></label>
+          <label><span data-t="fEmail">البريد الإلكتروني</span><input name="email" type="email" dir="ltr" autocomplete="email" required maxlength="150"></label>
+        </div>
+        <label><span data-t="fSubject">الموضوع</span>
+          <select name="topic" id="fTopic">
+            <option value="general" data-t="subjGeneral">استفسار عام</option>
+            <option value="bulk" data-t="subjBulk">طلبات المؤسسات والجملة</option>
+            <option value="talks" data-t="subjTalks">محاضرات وورش عمل</option>
+            <option value="media" data-t="subjMedia">إعلام ومقابلات</option>
+            <option value="feedback" data-t="subjFeedback">رأيك في الكتاب</option>
+          </select>
+        </label>
+        <label><span data-t="fMessage">رسالتك</span><textarea name="message" required maxlength="5000"></textarea></label>
+        <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="fstatus" id="fStatus" role="status" hidden></p>
+        <button class="btn btn-gold" type="submit" id="fSend"><span data-t="fSend">أرسل الرسالة</span> <span class="arrow">→</span></button>
+        <p class="fnote" data-t="fPrivacy"></p>
+      </form>
+      <aside class="connect">
+        <h3 data-t="asideTitle">طرق أخرى للتواصل</h3>
+        <p data-t="asideReply"></p>
+        <p data-t="asideLangs"></p>
+        <div class="links">
+          <a class="btn btn-gold" href="https://www.drmash.net" target="_blank" rel="noopener" data-t="siteBtn">الموقع الشخصي</a>
+          <a class="btn btn-line" href="https://www.linkedin.com/in/abusheikha" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</div>
 </main>
 
 <footer class="site">
@@ -717,6 +782,7 @@ a.store:hover{border-color:var(--gold)}
       <a href="#preview" data-go="preview" data-t="navPreview">تصفّح الكتاب</a>
       <a href="#author" data-go="author" data-t="navAuthor">المؤلف</a>
       <a href="#buy" data-go="buy" data-t="navBuy">الشراء</a>
+      <a href="#contact" data-go="contact" data-t="navContact">تواصل</a>
       <a href="https://www.drmash.net" target="_blank" rel="noopener">drmash.net</a>
     </nav>
     <div class="copy"><span data-t="copyright">© ٢٠٢٦ د. محمد أبوشيخه. جميع الحقوق محفوظة.</span><span data-t="footCharity">ريع هذا الكتاب صدقةٌ جارية</span></div>
@@ -738,7 +804,8 @@ const CONFIG = {
     { name:'Amazon', url:'', fmt:'print' },
     { name:'Jamalon', url:'', fmt:'print' }
   ],
-  donate: ''                  // link for readers who received a free copy
+  donate: '',                 // link for readers who received a free copy
+  contactKey: ''              // Web3Forms access key (web3forms.com); messages go to the email it was created for
 };
 
 const IMG = lang => ({
@@ -819,6 +886,16 @@ ar:{
   checkoutSoon:'سيُفتح الشراء قريباً. تابع موقع المؤلف لتعرف موعد الإطلاق.',
   buyCards:[['هدية تبقى','أهدِ الكتاب لمن تحب، فتكون شريكاً في كل خير يعمله بقواعده.'],['طلبات المؤسسات','للمساجد والمدارس والجهات الراغبة في طلبات بالجملة أو إهداءات مؤسسية.','contact'],['وصلتك نسخة مجانية؟','إن انتفعت بها، تبرّع بما يعادل ثمنها ٩٫٩٩ دولار صدقةً جارية، رجاءً لا أمراً.','donate']],
   contactBtn2:'تواصل معنا', donateBtn:'تبرّع الآن',
+  navContact:'تواصل', contactEyebrow:'تواصل معنا', contactTitle:'راسل المؤلف',
+  contactLead:'سؤال عن الكتاب، طلب نسخ لمؤسستك، أو دعوة لمحاضرة؟ اكتب لنا وسنردّ عليك بإذن الله.',
+  fName:'الاسم', fEmail:'البريد الإلكتروني', fSubject:'الموضوع', fMessage:'رسالتك', fSend:'أرسل الرسالة', fSending:'جارٍ الإرسال…',
+  subjGeneral:'استفسار عام', subjBulk:'طلبات المؤسسات والجملة', subjTalks:'محاضرات وورش عمل', subjMedia:'إعلام ومقابلات', subjFeedback:'رأيك في الكتاب',
+  fPrivacy:'نستخدم اسمك وبريدك للرد على رسالتك فقط، ولا نشاركهما مع أحد.',
+  fInvalid:'يرجى كتابة الاسم وبريد إلكتروني صحيح ونص الرسالة.',
+  fOk:'وصلت رسالتك، شكراً لك. سنردّ عليك قريباً بإذن الله.',
+  fErr:'تعذّر إرسال الرسالة. حاول مرة أخرى بعد قليل، أو راسل المؤلف عبر موقعه drmash.net.',
+  fOff:'نموذج التواصل قيد التفعيل. إلى ذلك الحين، راسل المؤلف عبر موقعه drmash.net.',
+  asideTitle:'طرق أخرى للتواصل', asideReply:'نردّ عادةً خلال ثلاثة أيام عمل.', asideLangs:'نستقبل الرسائل بالعربية والإنجليزية.',
   copyright:'© ٢٠٢٦ د. محمد أبوشيخه. جميع الحقوق محفوظة.', footCharity:'ريع هذا الكتاب صدقةٌ جارية',
   anaA:[['رقم القاعدة ونوعها','الأخضر لآخرتك والذهبي لدنياك، وتتناوب القواعد بينهما.'],['اسم القاعدة ونصّها','صياغة جديدة موجزة تُحفظ وتُردَّد.'],['شرح تطبيق القاعدة','كيف تنقل القاعدة من الورق إلى يومك.'],['خطوات التطبيق','خمس خطوات عملية مرقّمة تبدأ بها اليوم.'],['المعادلة البصرية','إنفوغرافيك يلخّص القاعدة في معادلة واحدة.'],['الدليل','آية أو حديث صحيح مع مصدره.']],
   anaB:[['أمثلة واقعية','ثلاثة أمثلة موثّقة: من حياة النبي ﷺ، ومن الصحابة، ومن أعلام الأمة.'],['القاعدة بكلماتك','اكتب القاعدة بأسلوبك، وأين تحتاجها، وقصتك معها.'],['جدول المتابعة','تابع خطواتك الخمس سبعة أيام، ثم قيّم نفسك من عشرة.']],
@@ -901,6 +978,16 @@ en:{
   checkoutSoon:'Purchasing opens soon. Follow the author’s website for the launch date.',
   buyCards:[['A gift that lasts','Give the book to someone you love and share in every good they do through its rules.'],['Organisation orders','For mosques, schools and organisations interested in bulk orders or institutional gifts.','contact'],['Received a free copy?','If it benefited you, donate the equivalent of its price, $9.99, as an ongoing charity: a request, not an instruction.','donate']],
   contactBtn2:'Contact us', donateBtn:'Donate now',
+  navContact:'Contact', contactEyebrow:'Get in touch', contactTitle:'Write to the author',
+  contactLead:'A question about the book, copies for your organisation, or an invitation to speak? Write to us and we will get back to you.',
+  fName:'Name', fEmail:'Email', fSubject:'Subject', fMessage:'Your message', fSend:'Send message', fSending:'Sending…',
+  subjGeneral:'General question', subjBulk:'Bulk and organisation orders', subjTalks:'Talks and workshops', subjMedia:'Media and interviews', subjFeedback:'Feedback on the book',
+  fPrivacy:'We use your name and email only to reply to your message, and never share them.',
+  fInvalid:'Please enter your name, a valid email address and a message.',
+  fOk:'Thank you, your message has arrived. We will reply soon.',
+  fErr:'Your message could not be sent. Please try again shortly, or contact the author via drmash.net.',
+  fOff:'The contact form is being set up. Until then, please contact the author via drmash.net.',
+  asideTitle:'Other ways to reach us', asideReply:'We usually reply within three working days.', asideLangs:'Messages are welcome in Arabic and English.',
   copyright:'© 2026 Dr. Mohammad Abushaikha. All rights reserved.', footCharity:'The proceeds of this book are an ongoing charity',
   anaA:[['Rule number and type','Green for your Hereafter, gold for your world; the rules alternate between them.'],['Rule name and wording','A new, concise wording to memorise and repeat.'],['Applying the rule','How to move the rule from the page into your day.'],['Steps to apply','Five practical, numbered steps you can start today.'],['Visual equation','An infographic that sums up the rule in one equation.'],['Evidence','A verse or authentic hadith with its source.']],
   anaB:[['Real-life examples','Three documented examples: from the Prophet ﷺ, the Companions and the luminaries of Islam.'],['The rule in your words','Write the rule your way, where you need it, and your story with it.'],['Tracking table','Track your five steps for seven days, then rate yourself out of ten.']],
@@ -1087,10 +1174,11 @@ function renderBuy(){
   $('#checkoutNote').hidden = true;
   $('#buyCards').innerHTML = t.buyCards.filter(c => c[2]!=='donate' || CONFIG.donate).map(c => {
     let btn = '';
-    if (c[2]==='contact') btn = `<a class="btn btn-dark" href="https://www.drmash.net/contact/" target="_blank" rel="noopener">${t.contactBtn2}</a>`;
+    if (c[2]==='contact') btn = `<a class="btn btn-dark" href="#contact" data-go="contact" data-subject="bulk">${t.contactBtn2}</a>`;
     if (c[2]==='donate') btn = CONFIG.donate ? `<a class="btn btn-dark" href="${CONFIG.donate}" target="_blank" rel="noopener">${t.donateBtn}</a>` : `<span class="store">${t.donateBtn} <em>${t.comingSoon}</em></span>`;
     return `<div><h3>${c[0]}</h3><p>${c[1]}</p>${btn}</div>`;
   }).join('');
+  bindGo($('#buyCards'));
 }
 $$('#editionSeg button').forEach(b => b.addEventListener('click', () => { edition = b.dataset.ed; renderBuy(); }));
 $('#qMinus').addEventListener('click', () => { qty = Math.max(1, qty-1); renderBuy(); });
@@ -1102,7 +1190,7 @@ $('#checkout').addEventListener('click', () => {
 });
 
 /* ===== Views ===== */
-const VIEWS = ['home','preview','author','buy'];
+const VIEWS = ['home','preview','author','buy','contact'];
 function go(view, href){
   const target = href && href.startsWith('#') ? href.slice(1) : view;
   if (!VIEWS.includes(view)) view = 'home';
@@ -1115,6 +1203,31 @@ function go(view, href){
   if (el) el.scrollIntoView({behavior:'smooth'}); else window.scrollTo({top:0});
 }
 bindGo(document);
+document.addEventListener('click', e => { const a = e.target.closest('[data-subject]'); if (a) $('#fTopic').value = a.dataset.subject; });
+
+/* ===== Contact form (Web3Forms) ===== */
+const cform = $('#contactForm');
+function fStatus(kind, msg){ const s = $('#fStatus'); s.className = 'fstatus ' + kind; s.textContent = msg; s.hidden = false; }
+cform.addEventListener('submit', async e => {
+  e.preventDefault();
+  const t = L(), f = cform.elements, btn = $('#fSend');
+  if (!CONFIG.contactKey) return fStatus('err', t.fOff);
+  if (!cform.checkValidity() || !f.name.value.trim() || !f.message.value.trim()) return fStatus('err', t.fInvalid);
+  if (f.botcheck.checked) return;
+  btn.disabled = true; btn.firstElementChild.textContent = t.fSending; $('#fStatus').hidden = true;
+  const topic = f.topic.options[f.topic.selectedIndex].text;
+  try {
+    const r = await fetch('https://api.web3forms.com/submit', {
+      method:'POST', headers:{'Content-Type':'application/json', Accept:'application/json'},
+      body: JSON.stringify({ access_key:CONFIG.contactKey, subject:`غداً وأبداً · ${topic}`, from_name:'Tomorrow & Forever website',
+        name:f.name.value.trim(), email:f.email.value.trim(), topic, message:f.message.value.trim(), language:lang })
+    });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok || !d.success) throw new Error(d.message || r.status);
+    cform.reset(); fStatus('ok', t.fOk);
+  } catch(err) { fStatus('err', t.fErr); }
+  finally { btn.disabled = false; btn.firstElementChild.textContent = t.fSend; }
+});
 $('#menuBtn').addEventListener('click', () => { const o = $('#mainNav').classList.toggle('open'); $('#menuBtn').setAttribute('aria-expanded', o); });
 $('#langBtn').addEventListener('click', () => { lang = lang==='ar'?'en':'ar'; edition = lang; store.set('tf-lang', lang); applyLang(); });
 
