@@ -1,0 +1,48 @@
+{
+  "site": "https://naspire2025.github.io/tomorrow-and-forever/",
+  "views": ["home", "preview", "author", "buy", "contact"],
+  "ar": {
+    "home": {
+      "title": "غداً وأبداً · القواعد الذهبية المئة لحياة متوازنة",
+      "description": "كتاب «غداً وأبداً» للدكتور محمد أبوشيخه: مائة قاعدة ذهبية عملية تجمع بين عمارة الدنيا والاستعداد للآخرة، لحياة متوازنة وثروة حلال. ريعه صدقة جارية."
+    },
+    "preview": {
+      "title": "تصفّح الكتاب · غداً وأبداً",
+      "description": "تصفّح صفحات حقيقية من كتاب «غداً وأبداً»: الغلاف والمقدمة ونماذج من القواعد الذهبية المئة."
+    },
+    "author": {
+      "title": "د. محمد أبوشيخه · مؤلف غداً وأبداً",
+      "description": "تعرّف إلى د. محمد أبوشيخه: أكثر من عشرين عاماً بين الهندسة والأداء المؤسسي، ومؤسس مبادرات مجتمعية، ومؤلف «غداً وأبداً»."
+    },
+    "buy": {
+      "title": "اشترِ الكتاب · غداً وأبداً",
+      "description": "احصل على نسختك من «غداً وأبداً» إلكترونياً أو ورقياً، بالعربية أو الإنجليزية. ريع كل نسخة صدقة جارية."
+    },
+    "contact": {
+      "title": "تواصل · غداً وأبداً",
+      "description": "راسل مؤلف «غداً وأبداً»: أسئلة عن الكتاب، طلبات المؤسسات والجملة، ودعوات المحاضرات وورش العمل."
+    }
+  },
+  "en": {
+    "home": {
+      "title": "Tomorrow & Forever · The Hundred Golden Rules for a Balanced Life",
+      "description": "Tomorrow & Forever by Dr. Mohammad Abushaikha: one hundred practical golden rules that unite building this world with preparing for the Hereafter. Its proceeds are an ongoing charity."
+    },
+    "preview": {
+      "title": "Look Inside · Tomorrow & Forever",
+      "description": "Browse real pages from Tomorrow & Forever: the cover, the introduction and sample rules from the hundred golden rules."
+    },
+    "author": {
+      "title": "Dr. Mohammad Abushaikha · Author of Tomorrow & Forever",
+      "description": "Meet Dr. Mohammad Abushaikha: over twenty years in engineering and organisational performance, founder of community initiatives, and author of Tomorrow & Forever."
+    },
+    "buy": {
+      "title": "Buy the Book · Tomorrow & Forever",
+      "description": "Get your copy of Tomorrow & Forever as an ebook or in print, in Arabic or English. The proceeds of every copy are an ongoing charity."
+    },
+    "contact": {
+      "title": "Contact · Tomorrow & Forever",
+      "description": "Write to the author of Tomorrow & Forever: questions about the book, bulk and organisation orders, and invitations for talks and workshops."
+    }
+  }
+}
